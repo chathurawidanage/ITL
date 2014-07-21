@@ -1,6 +1,7 @@
 <!--
 @Author Chathura Widanage
 -->
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,7 +11,8 @@
         <link rel="stylesheet" href="css/style.css">        
         <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-        <script type="text/javascript" src="js/map.js"></script>
+        <script type="text/javascript" src="js/map.js"></script><!---->
+        <script type="text/javascript" src="js/Company.js"></script>
         <script type="text/javascript" src="js/filter.js"></script>
     </head>
     <body>
@@ -48,11 +50,15 @@
                     </div>
                 </div>
             </div>
+
+            <div id="map-zoom-out" class="dragger">
+
+            </div>
         </div>
-        
+
         <div id="data-outs">
             <div id="data-out-close"></div>
-            <h2>99X Technologies</h2>
+            <h2 id="com-name">99X Technologies</h2>
         </div>
 
 
