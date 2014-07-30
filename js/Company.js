@@ -4,8 +4,9 @@
  */
 
 function Company(id, callback) {
-    this.id;
+    this.id = id;
     this.name;
+    this.address;
     this.email;
     this.web;
     this.vision;
@@ -19,33 +20,60 @@ function Company(id, callback) {
     this.lat;
     this.long;
     this.logo;
-
-    $.getJSON('JSON/company_data.php', {id: id}, function(data) {
+    this.contact;
+    this.technologies = new Array();
+    this.description;
+    $.getJSON('JSON/institute_data.php', {id: id}, function(data) {
         company = $.parseJSON(data);
-        this.id = id;
-        this.name = company["name"];
-        this.email = company["email"];
-        this.web = company["web"];
-        this.vision = company["vision"];
-        this.mission = company["mission"];
-        this.established = company["established"];
-        this.achievements = company["achievements"];
-        this.partners = company["partners"];
-        this.clients = company["clients"];
-        this.empCount = company["emp_count"];
-        this.fb = company["fb"];
-        this.lat = company["lat"];
-        this.long = company["long"];
-        this.logo = company["logo"];
-        callback(this);
+        name = company["name"];
+        address = company["address"];
+        email = company["email"];
+        web = company["web"];
+        vision = company["vision"];
+        mission = company["mission"];
+        established = company["established"];
+        achievements = company["achievements"];
+        partners = company["partners"];
+        clients = company["clients"];
+        empCount = company["emp_count"];
+        fb = company["fb"];
+        lat = company["lat"];
+        long = company["long"];
+        logo = company["logo"];
+        contact = company["contact"];
+        setTechnologies(callback);
     }).fail(function(error) {
         console.log("error fetching company");
     });
+
+    /**
+     * fetch and sets the technologies
+     * @param {type} callback
+     * @returns {undefined}
+     */
+    function setTechnologies(callback) {
+        $.getJSON('JSON/company_technologies.php', {id: id}, function(data) {
+            technologies = $.parseJSON(data);
+            callback(getInstance());//pass the instance to the call back function
+        }).fail(function(error) {
+            console.log("error fetching technologies");
+        });
+    }
+
+    function getInstance() {
+        return this;
+    }
+
+
 }
 
-
-
-
-
+function Contact() {
+    this.position;
+    this.name;
+    this.email;
+    this.linkedin;
+    this.phone;
+    this.fb;
+}
 
 

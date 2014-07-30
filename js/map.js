@@ -1,5 +1,3 @@
-var map;
-var logoLocation = "images/logos/";
 $(document).ready(function() {
     var mapOptions = {
         center: new google.maps.LatLng(6.9344, 79.8428),
@@ -29,29 +27,11 @@ $(document).ready(function() {
     var companies = new Array();
     var markers = new Array();
     var locDots = new Array();
-    /*
-     companies[0] = new Array();
-     companies[0]["logo"] = "images/logos/99x.png";
-     companies[0]["name"] = "99X Technology";
-     companies[0]["id"] = 1;
-     companies[0]["lat"] = 6.905592;
-     companies[0]["long"] = 79.854968;
-     
-     companies[1] = new Array();
-     companies[1]["logo"] = "images/logos/wso2.png";
-     companies[1]["name"] = "WSO2";
-     companies[1]["id"] = 2;
-     companies[1]["lat"] = 6.9105413;
-     companies[1]["long"] = 79.8524775;
-     
-     companies[2] = new Array();
-     companies[2]["logo"] = "images/logos/virtusa.png";
-     companies[2]["name"] = "Virtusa";
-     companies[2]["id"] = 3;
-     companies[2]["lat"] = 6.94073;
-     companies[2]["long"] = 79.879677;
+
+    /**
+     * requesting JSON array of company infrmation
      */
-    $.getJSON('JSON/company_cordinates.php', function(data) {
+    $.getJSON('JSON/institute_cordinates.php', function(data) {
         companies = $.parseJSON(data);
         console.log(companies);
     }).fail(function(error) {
@@ -59,13 +39,13 @@ $(document).ready(function() {
     }).success(function() {
         for (i = 0; i < companies.length; i++) {
             company = companies[i];
-            addMarjer(company, i);
+            addMarker(company, i);
         }
     });
 
 
 
-    function addMarjer(company, i) {
+    function addMarker(company, i) {
         locDots[i] = new google.maps.Marker({
             position: new google.maps.LatLng(company["lat"], company["long"]),
             title: company["name"],
@@ -92,15 +72,17 @@ $(document).ready(function() {
             map.setZoom(20);
             map.setCenter(markers[i].getPosition());
             map.panBy(-($(window).width() - 650) / 2, ($(window).height()) / 4);
-            markerClicked(companies[i]["id"], companies[i]["name"]);
+            markerClicked(companies[i]["id"], companies[i]["name"], companies[i]["type"]);
         });
 
         google.maps.event.addListener(locDots[i], 'click', function() {
             map.setZoom(20);
             map.setCenter(markers[i].getPosition());
             map.panBy(-($(window).width() - 650) / 2, ($(window).height()) / 4);
-            markerClicked(companies[i]["id"], companies[i]["name"]);
+            markerClicked(companies[i]["id"], companies[i]["name"], companies[i]["type"]);
         });
     }
+
+
 });
 

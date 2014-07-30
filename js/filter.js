@@ -3,7 +3,7 @@ var textSearchShowing = false;
 var controllersSearchShowing = false;
 
 $(document).ready(function() {
-
+    //showDataOut();
     $("#text-dragger").click(function() {
         if (!textSearchShowing) {
             hideDataOut();
@@ -46,13 +46,91 @@ $(document).ready(function() {
  * @param {int} id id of the company
  * @returns {undefined}
  */
-function markerClicked(id, name) {
+function markerClicked(id, name, type) {
+    $("#data-out-data").hide();
     $("#data-outs").css('background-image', "url(images/loading.gif)");
+    showDataOut();
     Company(id, function(data) {
-        console.log(data.name);
-        showDataOut();
+        setData(data, function() {
+            $("#data-outs").css('background-image', "none");
+            $("#data-out-data").show();
+        });
     });
+}
 
+/**
+ * Sets data on the data panel
+ * @param {type} company company object
+ * @param {type} callback
+ * @returns {undefined}
+ */
+function setData(company, callback) {
+    //company = new Company();
+    logoF = $("#comp-logo");
+    addressF = $('#comp-address');
+    emailF = $("#comp-email");
+    foundedF = $("#comp-founded");
+    empCountF = $("#emp-count");
+    webF = $("#comp-web");
+    contactF = $("#comp-contact");
+    technologyF = $("#comp-technology");
+
+    $(logoF).prop('src', logoLocation + company.logo);
+    $(addressF).html(getFormattedAddress(company.address));
+    $(emailF).html(getFormattedEmail(company.email));
+    $(foundedF).html(company.established);
+    $(empCountF).html(company.empCount);
+    $(webF).html(getFormattedURL(company.web));
+    $(contactF).html(getFormattedContacts(company.contact));
+    $(technologyF).html(getFormattedTechnologies(company.technologies));
+
+    callback();
+
+    function getFormattedTechnologies(tech) {
+        techString = "";
+        for (i = 0; i < tech.length; i++) {
+            techString += tech[i]["name"];
+            if (i !== tech.length - 1) {
+                techString += ",";
+            }
+        }
+        return techString;
+    }
+
+    function getFormattedContacts(cont) {
+        contacts = cont.toString().split(",");
+        contactsNew = "";
+        for (i = 0; i < contacts.length; i++) {
+            contactsNew += "<li>" + contacts[i].trim() + "</li>";//adding a line breaker}
+        }
+        return contactsNew;
+    }
+
+    function getFormattedURL(url) {
+        return "<a href='" + url.trim() + "'>" + url.trim() + "</a>";
+    }
+
+    function getFormattedEmail(em) {
+        emails = em.toString().split(",");
+        emailsNew = "";
+        for (i = 0; i < emails.length; i++) {
+            emailsNew += "<li><a href='mailto:" + emails[i].trim() + "'>" + emails[i].trim() + "</a></li>";//adding a line breaker}
+        }
+        return emailsNew;
+    }
+
+    function getFormattedAddress(adr) {
+        adrLines = adr.toString().split(',');
+        adrNew = "";
+        for (i = 0; i < adrLines.length; i++) {
+            if (i !== adrLines.length - 1) {
+                adrNew += adrLines[i].trim() + ",<br>";//adding a line breaker}
+            } else {
+                adrNew += adrLines[i].trim();
+            }
+        }
+        return adrNew;
+    }
 }
 
 /**
@@ -61,7 +139,7 @@ function markerClicked(id, name) {
  */
 function hideDataOut() {
     $("#data-outs").animate({
-        top: "-120%"
+        top: "-1000px"
     }, animeSpeed);
 }
 

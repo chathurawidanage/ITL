@@ -13,13 +13,11 @@
 }
 
 #map{
-    //top:100px;
     height: 100%;
     z-index: 1;
 }
 
 #controls{
-    //margin-top: 100px;
     position: absolute;
     padding: 20px;
     width: 600px;
@@ -66,7 +64,7 @@
     box-shadow: 1px 1px gray;
     left: -570px;
     position: fixed;
-    width: 570px;
+    width: 540px;
 }
 
 #filter-by-controlers{    
@@ -76,7 +74,7 @@
 .dragger{
     position: absolute;
     width: 50px;
-    height: 65px;
+    height: 68px;
     right: -50px;
     top: 0px;
 
@@ -89,6 +87,7 @@
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     box-shadow: 1px 1px gray;
+    
 }
 
 
@@ -96,24 +95,27 @@
     position: fixed;
     left: 60px;
     background-color: white;
-    //width: 600px;
+    max-width: 600px;
+    min-width: 100px;
     top:20px;
 
     margin: auto;
-    height: 100%;
-    max-height: calc(100% - 50px);
+    //height: 100%;
+    //max-height: calc(100% - 50px);
+    min-height: 200px;
+
     z-index: 99;
 
     border-radius: 5px;
-    //box-shadow: 1px 1px gray;
+    box-shadow: 1px 1px gray;
 
     top: -120%;
-   padding-left: 20px;
-    
+    padding: 10px;
+
     background-position: center;
     background-repeat: no-repeat;
 
-    background-color: transparent;
+   
 
 }
 
@@ -133,21 +135,50 @@
     height: 50px;
     background-repeat: no-repeat;
     background-position: center;
+    border-radius: 5px;
+    box-shadow: 1px 1px gray;
     position: fixed;
     right: 20px;
     top:150px;
 }
 
-.borders{
-    -moz-border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0;
-    /*IE 7 AND 8 DO NOT SUPPORT BORDER RADIUS*/
-    -moz-box-shadow: 0px 0px 5px #000000;
-    -webkit-box-shadow: 0px 0px 5px #000000;
-    box-shadow: 0px 0px 5px #000000;
-    /*IE 7 AND 8 DO NOT SUPPORT BLUR PROPERTY OF SHADOWS*/
-    cursor:pointer;
+.data-list{
+    list-style: none;
+    padding: 0;
+}
+
+.data-table{
+    border: none;
+}
+#comp-social{
+    width: 100%;
+    height: 30px;
+}
+
+#comp-social li{
+    float: left;
+    height: 25px;
+    width: 25px;
+    background-repeat: no-repeat;
+    background-position: center;    
+    background-color: rgba(0,0,0,0.3);
+    padding: 12px;
+    margin: 3px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+#comp-fb{
+    background-image: url(../images/social/facebook.png);
+}
+#comp-gp{
+    background-image: url(../images/social/googleplus.png);
+}
+#comp-li{
+    background-image: url(../images/social/linkedin.png);
+}
+#comp-yt{
+    background-image: url(../images/social/youtube.png);
 }
 
 .about-company{
@@ -179,14 +210,5 @@
 .company-title{
     vertical-align:text-bottom;
     text-align: center;
-}
 
-#nav-bar{
-    visibility: hidden;
-    position: fixed;
-    width: 100%;
-    height: 100px;
-    background-color: white;
-    box-shadow: 0px 0px 20px black;
-    z-index: 100;
 }
